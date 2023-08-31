@@ -10,6 +10,7 @@ To verify PCP is configured correctly, and services are active, run the followin
 This outputs a summary of the active PCP configuration.
 
 .Example output from the `pcp` command:
+[options="nowrap", subs="verbatim,quotes,attributes"]
 ----
 Performance Co-Pilot configuration on {foreman-example-com}:
 

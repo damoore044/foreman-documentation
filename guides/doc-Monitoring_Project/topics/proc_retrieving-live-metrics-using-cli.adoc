@@ -9,6 +9,7 @@ To output metrics on disk partition write instances, enter the following command
 In this example, PCP converts the number of writes to disk partitions from a counter value, to a rate value. The `-f 1` specifies that the value be abbreviated to one decimal place.
 
 .Example output
+[options="nowrap", subs="verbatim,quotes,attributes"]
 ----
 metric:    disk.partitions.write
 host:      {foreman-example-com}
@@ -16,10 +17,10 @@ semantics: cumulative counter (converting to rate)
 units:     count (converting to count / sec)
 samples:   all
 
-                 vda1                  vda2                   sr0 
-                  0.0                  12.0                   0.0 
-                  0.0                   1.0                   0.0 
-                  0.0                   1.0                   0.0 
+                 vda1                  vda2                   sr0
+                  0.0                  12.0                   0.0
+                  0.0                   1.0                   0.0
+                  0.0                   1.0                   0.0
                   0.0                   2.0                   0.0
 ----
 

@@ -158,6 +158,7 @@ To enable collection of metrics from {Project}, you must send metrics via the `s
 
 .. Install the Foreman Telemetry and `pcp-mmvstatsd` packages.
 +
+[options="nowrap", subs="verbatim,quotes,attributes"]
 ----
 # {package-install-project} foreman-telemetry pcp-mmvstatsd
 ----

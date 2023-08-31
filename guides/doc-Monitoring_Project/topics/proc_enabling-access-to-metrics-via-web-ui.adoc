@@ -13,6 +13,7 @@ This procedure describes how to access metrics collected by PCP, via the web UI.
 
 . Install the PCP web API and applications:
 +
+[options="nowrap", subs="verbatim,quotes,attributes"]
 ----
 # {package-install-project} pcp-webapi pcp-webapp-grafana pcp-webapp-vector
 ----

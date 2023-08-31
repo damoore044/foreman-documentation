@@ -21,6 +21,7 @@ The default PCP data retention policy is to retain only that data collected duri
 
 . Install the PCP packages:
 +
+[options="nowrap", subs="verbatim,quotes,attributes"]
 ----
 # {package-install-project} pcp \
   pcp-pmda-apache \

@@ -21,6 +21,7 @@ pminfo --archive _archive_file_
 
 * To list disk writes for each partition, over the time period covered by the archive file:
 +
+[options="nowrap", subs="verbatim,quotes,attributes"]
 ----
 # pmval --archive /var/log/pcp/pmlogger/{foreman-example-com}/20180816.00.10 \
   -f 1 disk.partitions.write
