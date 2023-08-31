@@ -1,6 +1,6 @@
-= Monitoring Red Hat Satellite
+= Monitoring {ProjectName}
 :imagesdir: topics/images
-:monitoring-red-hat-satellite:
+:monitoring-project:
 :numbered:
 :context: monitoring-guide
 

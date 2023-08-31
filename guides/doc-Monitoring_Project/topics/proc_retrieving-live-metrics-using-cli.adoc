@@ -11,7 +11,7 @@ In this example, PCP converts the number of writes to disk partitions from a cou
 .Example output
 ----
 metric:    disk.partitions.write
-host:      satellite.example.com
+host:      {foreman-example-com}
 semantics: cumulative counter (converting to rate)
 units:     count (converting to count / sec)
 samples:   all
