@@ -1,10 +1,10 @@
+include::common/attributes.adoc[]
+include::common/header.adoc[]
 = Monitoring {ProjectName}
 :imagesdir: topics/images
 :monitoring-project:
-:numbered:
 :context: monitoring-guide
 
-include::common/attributes.adoc[]
 include::topics/con_satellite_metrics_overview.adoc[leveloffset=+1]
 include::topics/con_performance-co-pilot.adoc[leveloffset=+1]
 include::topics/con_performance-metrics-domain-agents.adoc[leveloffset=+2]
