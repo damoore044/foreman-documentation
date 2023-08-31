@@ -7,32 +7,31 @@ This procedure describes how to install the PCP packages.
 
 * Ensure you have a minimum of 20 GB space available in the `/var/log/pcp` directory.
 +
-The default PCP data retention policy is to retain only that data collected during the past 14 days. Data storage per day is estimated to use usually between 100 MB and 500 MB of disk space, but may use up to several gigabytes.
-
-* Ensure that the base system on which {ProjectServer} is running is Red{nbsp}Hat Enterprise Linux 7.6. or later. The minimum supported version for the PCP packages is PCP version 4.1.
+PCP's default data retention policy is to retain data collected within the last 14 days.
+Data storage per day is estimated to use usually between 100 MB and 500 MB of disk space, but may use up to several gigabytes.
+For more information, see xref:changing-data-retention-policy_{context}[]
 
 .Procedure
-
-. Enable the Red{nbsp}Hat Enterprise Linux `optional` repository:
-+
-----
-# subscription-manager repos --enable rhel-7-server-optional-rpms
-----
 
 . Install the PCP packages:
 +
 [options="nowrap", subs="verbatim,quotes,attributes"]
 ----
+ifndef::foreman-deb[]
 # {package-install-project} pcp \
   pcp-pmda-apache \
+  pcp-pmda-openmetrics \
   pcp-pmda-postgresql \
-  pcp-system-tools \
-  pcp-webjs
+  pcp-pmda-redis \
+  pcp-system-tools
+endif::[]
+ifdef::foreman-deb[]
+# {package-install-project} pcp
+endif::[]
 ----
 
 . Enable and start the Performance Metrics Collector daemon, and the Performance Metrics Logger daemon:
 +
 ----
-# systemctl enable pmcd pmlogger
-# systemctl start pmcd pmlogger
+# systemctl enable --now pmcd pmlogger
 ----

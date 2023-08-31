@@ -1,13 +1,14 @@
-[id='retrieving-archived-metrics-cli_{context}']
+[id='retrieving-archived-metrics-using-cli_{context}']
 = Retrieving Archived Metrics using CLI
 
-You can use the PCP CLI tools to retrieve metrics from an archive file. To do that, add the `--archive` parameter and specify the archive file.
+You can use the PCP CLI tools to retrieve metrics from an archive file.
+To do that, add the `--archive` parameter and specify the archive file.
 
 * To list all metrics which were enabled when the archive file was created, enter the following command:
 +
 [options="nowrap", subs="verbatim,quotes,attributes"]
 ----
-pminfo --archive _archive_file_
+# pminfo --archive _archive_file_
 ----
 
 * To confirm the host and time period covered by an archive file, enter the following command:
@@ -37,7 +38,7 @@ pminfo --archive _archive_file_
   -S @14:00 -T @14:15
 ----
 
-* To list average values of all performance metrics, including the time of minimum/maximum value and the actual minimum/maximum value, between the time period 14:00 and 14:30. To output the values in tabular formatting:
+* To list average values of all performance metrics, including the time of minimum/maximum value and the actual minimum/maximum value, between the time period 14:00 and 14:30 and to output the values in tabular formatting:
 +
 [options="nowrap", subs="verbatim,quotes,attributes"]
 ----
@@ -49,7 +50,8 @@ pminfo --archive _archive_file_
   mem.freemem
 ----
 
-* To list system metrics stored in an archive, starting from 14:00. The metrics are displayed in a format similar to the `top` tool.
+* To list system metrics stored in an archive, starting from 14:00.
+The metrics are displayed in a format similar to the `top` tool.
 +
 [options="nowrap", subs="verbatim,quotes,attributes"]
 ----

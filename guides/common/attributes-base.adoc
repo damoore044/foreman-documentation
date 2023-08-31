@@ -145,3 +145,5 @@
 :client-pkg-arch: noarch
 :client-pkg-ext: rpm
 :client-provisioning-template-type: Kickstart
+// monitoring
+:MonitoringDocTitle: Monitoring {ProjectName}

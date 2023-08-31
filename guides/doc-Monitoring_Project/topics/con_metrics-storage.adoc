@@ -1,4 +1,4 @@
-[id='metrics-retention_{context}']
+[id='metrics-data-retention_{context}']
 = Metrics Data Retention
 
 The storage capacity required by PCP data logging is determined by the following factors:
@@ -9,4 +9,5 @@ The storage capacity required by PCP data logging is determined by the following
 
 The default logging (sampling) interval is 60 seconds.
 
-The default retention policy is to keep archives for the last 14 days, compressing archives older than one day. PCP archive logs are stored in the `/var/log/pcp/pmlogger/_hostname_` directory.
+The default retention policy is to keep archives for the last 14 days, compressing archives older than one day.
+PCP archive logs are stored in the `/var/log/pcp/pmlogger/_{foreman-example-com}_` directory.

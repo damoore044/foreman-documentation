@@ -1,4 +1,4 @@
-[id='configure-pcp-data-collection_{context}']
+[id='configuring-pcp-data-collection_{context}']
 = Configuring PCP Data Collection
 
 This procedure describes how to configure PCP to collect metrics about processes, {Project}, Apache HTTP Server, and PostgreSQL.
@@ -11,35 +11,32 @@ This procedure describes how to configure PCP to collect metrics about processes
 #pmdahotproc
 Version 1.0
 
-# processes with load 0.9 or 1GB RSS memory
-(cpuburn > 0.9 || residentsize > 1000000) &&
 (
   fname == "java" ||
-  fname == "qdrouterd" ||
-  fname == "qpidd" ||
+  fname == "redis-server" ||
   (fname == "postgres" && psargs ~ /-D/) ||
-  fname == "mongod" ||
-  fname == "dynflow_executor" ||
-  fname == "dynflow_executor_monitor" ||
-  fname ~ /smart_proxy_dynflow_core/ ||
-  psargs ~ /Passenger RackApp/ ||
-  psargs ~ /celery beat/ ||
-  psargs ~ /celery worker/ ||
-  psargs ~ /pulp/ ||
-  psargs ~ /smart-proxy/ ||
-  psargs ~ /squid.conf/
+  psargs ~ /puma/ ||
+ifndef::foreman-el,foreman-deb[]
+  psargs ~ /pulpcore.app.wsgi:application/ ||
+  psargs ~ /pulpcore.content:server/ ||
+  psargs ~ /pulpcore-worker/ ||
+endif::[]
+  psargs ~ /sidekiq/ ||
+  psargs ~ /smart-proxy/
 )
 ----
 +
-By default, PCP collects basic system metrics. This step enables detailed metrics about the following {Project} processes:
+By default, PCP collects basic system metrics.
+This step enables detailed metrics about the following {Project} processes:
 +
 * Java
 * PostgreSQL
-* MongoDB
+* Redis
 * Dynflow
-* Passenger
-* Pulp
-* Qpid
+* Puma
+ifndef::foreman-el,foreman-deb[]
+* Pulpcore
+endif::[]
 
 . Configure PCP to log the process metrics being collected.
 +
@@ -76,19 +73,9 @@ EOF
 +
 .. Enable the Apache HTTP Server extended status module.
 +
+[options="nowrap", subs="verbatim,quotes,attributes"]
 ----
-#cat >/etc/httpd/conf.d/01-status.conf <<EOF
-ExtendedStatus On
-LoadModule status_module modules/mod_status.so
-
-<Location "/server-status">
-PassengerEnabled off
-SetHandler server-status
-Order deny,allow
-Deny from all
-Allow from localhost
-</Location>
-EOF
+# {foreman-installer} --enable-apache-mod-status
 ----
 .. Enable the Apache HTTP Server PMDA.
 +
@@ -96,110 +83,33 @@ EOF
 # cd /var/lib/pcp/pmdas/apache
 # ./Install
 ----
-.. Prevent the {Project} installer overwriting the extended status module’s configuration file.
-+
-Add the following line to the  `/etc/foreman-installer/custom-hiera.yaml` configuration file.
-+
-----
-apache::purge_configs: false
-----
 
 . Configure PCP to collect metrics from PostgreSQL.
 
-.. Change to the `/var/lib/pcp/pmdas/postgresql` directory.
 +
------
+----
 # cd /var/lib/pcp/pmdas/postgresql
------
-
-.. Run the installer.
-+
-----
 # ./Install
-----
-
-.. Configure the PCP database interface to permit access to the PostgreSQL database.
-+
-Edit the `/etc/pcpdbi.conf` configuration file, inserting the following lines:
-+
-[options="nowrap", subs="verbatim,quotes,attributes"]
-----
-$database = "dbi:Pg:dbname=foreman;host=localhost";
-$username = "foreman";
-$password = "_6qXfN9m5nii5iEcbz8nuiJBNsyjjdRHA_"; <1>
-$os_user = "foreman";
-----
-+
-<1> The value for _$password_ is stored in `/etc/foreman/database.yml` configuration file.
-
-.. Change the SELinux `pcp_pmcd_t` domain permission to permit PCP access to the PostgreSQL database.
-+
-----
-# semanage permissive -a pcp_pmcd_t
-----
-
-.. Verify the PostgreSQL PMDA is able to connect to PostgreSQL.
-+
-Examine the `/var/log/pcp/pmcd/postgresql.log` file to confirm the connection is established. Without a successful database connection, the PostgreSQL PMDA will remain active, but not be able to provide any metrics.
-+
-----
-[Tue Aug 14 09:21:06] pmdapostgresql(25056) Info: PostgreSQL connection established
-----
-+
-If you find errors in `/var/log/pcp/pmcd/postgresql.log`, restart the *pmcd* service.
-+
-----
-# systemctl restart pmcd
 ----
 
 . Enable telemetry functionality in {Project}.
 +
-To enable collection of metrics from {Project}, you must send metrics via the `statsd` protocol into the `pcp-mmvstatsd` daemon. The metrics are aggregated and available via the PCP MMV API.
+[options="nowrap", subs="verbatim,quotes,attributes"]
+----
+# {foreman-installer} --foreman-telemetry-prometheus-enabled true
+----
 
-.. Install the Foreman Telemetry and `pcp-mmvstatsd` packages.
+. Configure PCP to collect data from {Project}.
 +
 [options="nowrap", subs="verbatim,quotes,attributes"]
 ----
-# {package-install-project} foreman-telemetry pcp-mmvstatsd
+# cd /var/lib/pcp/pmdas/openmetrics
+# echo "https://_{foreman-example-com}_/metrics" > config.d/foreman.url
+# ./Install
 ----
 
-.. Enable and start the `pcp-mmvstatsd` service.
+. Restart PCP to begin data collection:
 +
 ----
-# systemctl enable pcp-mmvstatsd
-# systemctl start pcp-mmvstatsd
-----
-
-.. Enable the {Project} telemetry functionality.
-+
-Add the following lines to `/etc/foreman/settings.yaml` configuration file:
-+
-----
-:telemetry:
-  :prefix: 'fm_rails'
-  :statsd:
-    :enabled: true
-    :host: '127.0.0.1:8125'
-    :protocol: 'statsd'
-  :prometheus:
-    :enabled: false
-  :logger:
-    :enabled: false
-    :level: 'INFO'
-----
-
-. Schedule daily storage of metrics in archive files:
-+
-----
-# cat >/etc/cron.daily/refresh_mmv <<EOF
-#!/bin/bash
-echo "log mandatory on 1 minute mmv" | /usr/bin/pmlc -P
-EOF
-# chmod +x /etc/cron.daily/refresh_mmv
-----
-
-. Restart the Apache HTTP Server and PCP to begin data collection:
-+
-----
-# systemctl restart httpd pmcd pmlogger
+# systemctl restart pmcd pmlogger
 ----

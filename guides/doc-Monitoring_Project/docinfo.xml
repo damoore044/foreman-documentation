@@ -1,6 +1,6 @@
 <title>Monitoring Red Hat Satellite</title>
 <productname>Red Hat Satellite</productname>
-<productnumber>6.9</productnumber>
+<productnumber>6.14</productnumber>
 <subtitle>Collecting metrics from Red Hat Satellite 6</subtitle>
 <abstract>
     <para>This guide describes how to gather metrics from Red Hat Satellite 6 for analysis. It is aimed at Satellite administrators.</para>
