@@ -5,7 +5,7 @@ include::common/header.adoc[]
 :monitoring-project:
 :context: monitoring-guide
 
-include::topics/con_satellite_metrics_overview.adoc[leveloffset=+1]
+include::topics/con_project_metrics_overview.adoc[leveloffset=+1]
 include::topics/con_performance-co-pilot.adoc[leveloffset=+1]
 include::topics/con_performance-metrics-domain-agents.adoc[leveloffset=+2]
 include::topics/proc_installing-pcp-packages.adoc[leveloffset=+1]

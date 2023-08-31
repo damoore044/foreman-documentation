@@ -1,4 +1,4 @@
-[id='satellite-metrics-overview_{context}']
+[id='project-metrics-overview_{context}']
 = Overview
 
 Obtaining metrics from {Project} is useful for troubleshooting a current issue, and capacity planning. This guide describes how to collect live metrics and archive them for a fixed period of time. If you need to raise a support case with Red{nbsp}Hat to resolve a performance issue, the archived data provides valuable insight. Note that Red Hat Support can only access the archived data if you upload it to a Support Case.
