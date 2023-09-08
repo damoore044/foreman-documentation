@@ -6,7 +6,7 @@ You can add and remove metrics to suit your requirements.
 
 You can also select the time span shown for each widget.
 
-For more details on using Grafana, see the link:https://grafana.com/[Grafana Labs] website.
+For more details on using Grafana, see the https://grafana.com/[Grafana Labs] website.
 
 .Procedure
 To retrieve metrics in the Performance Co-Pilot web applications UI, complete the following steps:

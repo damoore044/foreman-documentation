@@ -25,7 +25,6 @@ samples:   all
                   0.0                   2.0                   0.0
 ----
 
-
 To monitor system metrics with a two second interval:
 
 ----

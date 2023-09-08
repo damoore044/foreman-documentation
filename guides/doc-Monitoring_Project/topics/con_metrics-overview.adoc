@@ -1,5 +1,5 @@
-[id='project-metrics-overview_{context}']
-= Overview
+[id='metrics-overview_{context}']
+= Metrics Overview
 
 Obtaining metrics from {Project} is useful for troubleshooting a current issue, and capacity planning.
 This guide describes how to collect live metrics and archive them for a fixed period of time.

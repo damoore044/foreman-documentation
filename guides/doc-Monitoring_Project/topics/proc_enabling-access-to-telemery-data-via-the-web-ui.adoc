@@ -11,13 +11,11 @@ This procedure describes how to access metrics collected by PCP, via the web UI.
 ----
 # {package-install-project} grafana grafana-pcp
 ----
-
 . Start and enable the Grafana web service and the PCP proxy service:
 +
 ----
 # systemctl enable --now pmproxy grafana-server
 ----
-
 . Open firewall port to allow access to the Grafana web interface:
 +
 ----

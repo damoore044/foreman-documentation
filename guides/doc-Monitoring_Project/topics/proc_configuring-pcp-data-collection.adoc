@@ -4,7 +4,6 @@
 This procedure describes how to configure PCP to collect metrics about processes, {Project}, Apache HTTP Server, and PostgreSQL.
 
 .Procedure
-
 . To configure PCP to collect data about {Project} processes, create the `/var/lib/pcp/pmdas/proc/hotproc.conf` file and include the following content:
 +
 ----
@@ -83,22 +82,18 @@ EOF
 # cd /var/lib/pcp/pmdas/apache
 # ./Install
 ----
-
-. Configure PCP to collect metrics from PostgreSQL.
-
+. Configure PCP to collect metrics from PostgreSQL:
 +
 ----
 # cd /var/lib/pcp/pmdas/postgresql
 # ./Install
 ----
-
-. Enable telemetry functionality in {Project}.
+. Enable telemetry functionality in {Project}:
 +
 [options="nowrap", subs="verbatim,quotes,attributes"]
 ----
 # {foreman-installer} --foreman-telemetry-prometheus-enabled true
 ----
-
 . Configure PCP to collect data from {Project}.
 +
 [options="nowrap", subs="verbatim,quotes,attributes"]
@@ -107,7 +102,6 @@ EOF
 # echo "https://_{foreman-example-com}_/metrics" > config.d/foreman.url
 # ./Install
 ----
-
 . Restart PCP to begin data collection:
 +
 ----
