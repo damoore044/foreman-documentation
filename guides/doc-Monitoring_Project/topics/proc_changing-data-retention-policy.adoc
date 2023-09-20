@@ -12,7 +12,7 @@ ifdef::foreman-deb[]
 . Edit the `/etc/default/pmlogger_timers` file.
 endif::[]
 . Find the line containing `PMLOGGER_DAILY_PARAMS`.
-. Uncomment the line, if it is commented out.
+. Uncomment the line, if it is commented.
 . Ensure the default parameter `-E` is present.
 . Add parameter `-x`, and add a value for the desired number of days after which data is archived.
 . Add parameter `-k`, and add a value for the number of days after which data is deleted.

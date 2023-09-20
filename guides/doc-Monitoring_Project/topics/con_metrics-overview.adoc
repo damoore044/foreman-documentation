@@ -10,10 +10,10 @@ endif::[]
 
 You can collect the following metrics from {Project}:
 
-* Basic statistics from the operating system, including system load, memory utilization, and input/output operations;
-* Process statistics, including memory and CPU utilization;
-* Apache HTTP Server activity statistics;
-* PostgreSQL activity statistics;
+* Basic statistics from the operating system, including system load, memory utilization, and input/output operations.
+* Process statistics, including memory and CPU utilization.
+* Apache HTTP Server activity statistics.
+* PostgreSQL activity statistics.
 * {Project} application statistics.
 
 Use Performance Co-Pilot (PCP) to collect and archive {Project} metrics.

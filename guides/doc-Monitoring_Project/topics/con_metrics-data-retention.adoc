@@ -3,9 +3,9 @@
 
 The storage capacity required by PCP data logging is determined by the following factors:
 
-* the metrics being logged,
-* the logging interval,
-* and the retention policy.
+* The metrics being logged.
+* The logging interval.
+* The retention policy.
 
 The default logging (sampling) interval is 60 seconds.
 
